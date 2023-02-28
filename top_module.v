@@ -25,29 +25,29 @@ wire        wr_req         ;      //写数据请求信号
 wire        rd_busy        ;      //读忙信号
 wire        rd_val_en      ;      //数据读取有效使能信号
 wire[15:0]  rd_val_data    ;      //读数据
-wire			sd_init_done   ;      //SD卡初始化完成信号
+wire	    sd_init_done   ;      //SD卡初始化完成信号
 assign rstn=rst_n&locked;
 pll_clk pll_clk_inst(
-	.areset (1'b0),
-	.inclk0 (clk),
-	.c0	  (clk_ref),
-	.c1	  (clk_ref_180deg),
-	.locked (locked)
+	.areset 	(1'b0),
+	.inclk0 	(clk),
+	.c0	 	(clk_ref),
+	.c1	 	(clk_ref_180deg),
+	.locked 	(locked)
 );
 //
 data_gen data_gen_inst(
-	.clk				(clk_ref),
-	.rst_n			(rst_n),
+	.clk		(clk_ref),
+	.rst_n		(rst_n),
 	.sd_init_done	(sd_init_done),
-	.wr_busy			(wr_busy),//写数据忙信号
-	.wr_req 			(wr_req),
+	.wr_busy	(wr_busy),//写数据忙信号
+	.wr_req 	(wr_req),
 	.wr_start_en	(wr_start_en),
 	.wr_sec_addr	(wr_sec_addr),
-	.wr_data			(wr_data),
-	.rd_val_en		(rd_val_en),
+	.wr_data	(wr_data),
+	.rd_val_en	(rd_val_en),
 	.rd_val_data	(rd_val_data),
 	.rd_start_en	(rd_start_en),
 	.rd_sec_addr	(rd_sec_addr),
-	.err_flag		(err_flag)
+	.err_flag	(err_flag)
 );
 endmodule
