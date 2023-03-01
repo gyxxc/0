@@ -35,7 +35,7 @@ module sd_read(
     output  reg          rd_busy       ,  //读数据忙信号
     output  reg          rd_val_en     ,  //读数据有效信号
     output  reg  [15:0]  rd_val_data      //读数据
-    );
+);
 
 //reg define
 reg            rd_en_d0      ;            //rd_start_en信号延时打拍
