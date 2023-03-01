@@ -15,11 +15,11 @@ module sd_write(
 );
 parameter HEAD_BYTE=8'hfe;
 //registers
-reg 			wr_en_d0;
-reg 			wr_en_d1;
-reg 			res_en;
+reg 		wr_en_d0;
+reg 		wr_en_d1;
+reg 		res_en;
 reg[7:0] 	res_data;
-reg 			res_flag;
+reg 		res_flag;
 reg[5:0] 	res_bit_cnt;
 reg[3:0] 	wr_ctrl_cnt;
 reg[47:0] 	cmd_wr;
@@ -27,7 +27,7 @@ reg[47:0] 	cmd_wr;
 reg[3:0] 	bit_cnt;
 reg[8:0] 	data_cnt;
 reg[15:0] 	wr_data_t;
-reg 			detection_done_flag;
+reg 		detection_done_flag;
 reg[7:0] 	detected_data;
 //wires
 wire pos_wr_en;
@@ -76,7 +76,7 @@ always@(posedge clk_ref or negedge rstn) begin
 	if(!rstn)	detected_data<='d0;
 	else if(detection_done_flag)
 		detected_data<={detected_data[6:0],sd_miso};
-	else			detected_data<='d0;
+	else	detected_data<='d0;
 end
 //SDCard write-in
 endmodule
