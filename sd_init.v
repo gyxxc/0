@@ -29,7 +29,7 @@ module sd_init(
     output  reg    sd_cs         ,  //SD卡SPI片选信号
     output  reg    sd_mosi       ,  //SD卡SPI串行输出数据信号
     output  reg    sd_init_done     //SD卡初始化完成信号
-    );
+);
 
 //parameter define
 //SD卡软件复位命令,由于命令号及参数为固定值,CRC也为固定值,CRC = 8'h95
