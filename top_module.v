@@ -50,4 +50,28 @@ data_gen data_gen_inst(
 	.rd_sec_addr	(rd_sec_addr),
 	.err_flag	(err_flag)
 );
+sd_ctrl_top sd_ctrl_top_inst(
+	.clk_ref      	(clk_ref),  //时钟信号
+    	.clk_ref_180deg	(clk_ref_180deg),  //时钟信号,与clk_ref相位相差180度
+    	.rst_n         	(rst_n),  	//复位信号,低电平有效
+    	//SDCard interface
+    	.sd_miso       	(sd_miso),  //SD卡SPI串行输入数据信号
+    	.sd_clk        	(sd_clk),  	//SD卡SPI时钟信号    
+    	.sd_cs         	(sd_cs),  	//SD卡SPI片选信号
+    	.sd_mosi       	(sd_mosi),  //SD卡SPI串行输出数据信号
+    	//用户写SD卡接口
+    	.wr_start_en   	(wr_start_en), //开始写SD卡数据信号
+    	.wr_sec_addr   	(wr_sec_addr), //写数据扇区地址
+    	.wr_data       	(wr_data),  	//写数据                  
+    	.wr_busy       	(wr_busy),  	//写数据忙信号
+    	.wr_req        	(wr_req),  		//写数据请求信号    
+    	//用户读SD卡接口
+    	.rd_start_en   	(rd_start_en),  //开始读SD卡数据信号
+    	.rd_sec_addr   	(rd_sec_addr),  //读数据扇区地址
+    	.rd_busy       	(rd_busy),  	 //读数据忙信号
+    	.rd_val_en     	(rd_val_en),  	 //读数据有效信号
+    	.rd_val_data   	(rd_val_data),  //读数据    
+    
+    	.sd_init_done    (sd_init_done)	 //SD卡初始化完成信号
+);
 endmodule
