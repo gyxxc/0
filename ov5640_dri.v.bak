@@ -1,0 +1,48 @@
+module ov5640_dri(
+	 input           clk             ,  //时钟
+    input           rst_n           ,  //复位信号,低电平有效
+    //摄像头接口 
+    input           cam_pclk        ,  //cmos 数据像素时钟
+    input           cam_vsync       ,  //cmos 场同步信号
+    input           cam_href        ,  //cmos 行同步信号
+    input    [7:0]  cam_data        ,  //cmos 数据  
+    output          cam_rstn       ,  //cmos 复位信号，低电平有效
+    output          cam_pwdn        ,  //cmos 电源休眠模式选择信号
+    output          cam_scl         ,  //cmos SCCB_SCL线
+    inout           cam_sda         ,  //cmos SCCB_SDA线   
+    //摄像头分辨率配置接口
+    input    [12:0] cmos_h_pixel    ,  //水平方向分辨率
+    input    [12:0] cmos_v_pixel    ,  //垂直方向分辨率
+    input    [12:0] total_h_pixel   ,  //水平总像素大小
+    input    [12:0] total_v_pixel   ,  //垂直总像素大小
+    input           capture_start   ,  //图像采集开始信号
+    output          cam_init_done   ,  //摄像头初始化完成
+    
+    //用户接口
+    output          cmos_frame_vsync,  //帧有效信号    
+    output          cmos_frame_href ,  //行有效信号
+    output          cmos_frame_valid,  //数据有效使能信号
+    output  [15:0]  cmos_frame_data    //有效数据  
+);
+//parameters
+parameter SLAVE_ADDR =7'h3c;
+parameter BIT_CTRL	=1'b1;
+parameter CLK_FREQ	=27'd50_000_000;
+//wires
+
+assign cam_pwdn=1'b0;
+assign cam_rstn=1'b1;
+OV5640_capture_data cmos_capture_data_u(
+	 .rst_n              (rst_n & capture_start),
+    
+    .cam_pclk           (cam_pclk),
+    .cam_vsync          (cam_vsync),
+    .cam_href           (cam_href),
+    .cam_data           (cam_data),         
+    
+    .cmos_frame_vsync   (cmos_frame_vsync),
+    .cmos_frame_href    (cmos_frame_href ),
+    .cmos_frame_valid   (cmos_frame_valid), //数据有效使能信号
+    .cmos_frame_data    (cmos_frame_data )  //有效数据 
+);
+endmodule
